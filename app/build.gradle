@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -34,6 +35,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
 
 
@@ -58,6 +63,22 @@ dependencies {
     //recycler view
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
+    //epoxy
+    implementation 'com.airbnb.android:epoxy:4.6.3'
+    implementation 'com.airbnb.android:epoxy-paging:4.6.3'
+    kapt 'com.airbnb.android:epoxy-processor:4.6.3'
+
+    implementation 'androidx.paging:paging-runtime-ktx:2.1.1'
+    implementation 'androidx.paging:paging-rxjava2-ktx:2.1.1'
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 //    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
 //    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'

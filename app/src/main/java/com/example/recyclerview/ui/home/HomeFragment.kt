@@ -28,28 +28,20 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
 
         binding.rvNames.layoutManager = LinearLayoutManager(context)
         binding.rvNames.adapter = adapter
 
-
         registerObservers()
 
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
         unregisterObservers()
+        _binding = null
     }
 
     private fun adapterOnClick(name: String) {
@@ -62,9 +54,14 @@ class HomeFragment : Fragment() {
         homeViewModel.names.observe(viewLifecycleOwner, {
             adapter.updateDataSet(it)
         })
+
+        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+            binding.textHome.text = it
+        })
     }
 
     private fun unregisterObservers() {
         homeViewModel.names.removeObservers(viewLifecycleOwner)
+        homeViewModel.text.removeObservers(viewLifecycleOwner)
     }
 }
